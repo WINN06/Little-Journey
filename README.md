@@ -19,7 +19,7 @@ Open `http://127.0.0.1:4173` in a browser. The static files in `dist/` can also 
 3. Press **Start journey**. The pet runs through a scrolling scene while the countdown and progress bar update.
 4. Pause, resume, or end early when needed. On completion, the journey report appears in the same panel and a focus reward goes into the travel bag.
 
-The top right switch changes the interface between English and Chinese. English is the default on a new browser. The choice, plans, and discoveries are saved in that browser's local storage.
+The top right switch changes the interface between English and Chinese. English is the default on a new browser. The **MOTION ON/OFF** button above the scene lets the user stop or restart the animation without pausing the timer. Language, motion choice, plans, and discoveries are saved in that browser's local storage.
 
 ## Boundaries
 

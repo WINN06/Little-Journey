@@ -14,6 +14,10 @@ When trying the first prototype, I found it unclear where to start a task select
 
 This feedback came from the project author. It does **not** replace the assignment's required trial with another person.
 
+## Animation correction after author feedback
+
+The author reported that the exploration scene appeared frozen while the countdown continued. I reproduced this in a browser reporting `prefers-reduced-motion: reduce`: the first version disabled the entire canvas animation under that preference. I changed the scene to animate by default during an active journey and added a visible motion toggle for anyone who wants to stop it. I also gave the pet a more noticeable side-to-side running movement. In the same browser, I checked two running frames and saw the pet and scenery in different positions; switching motion off stopped the scene while the countdown continued.
+
 ## AI tools
 
 I used OpenAI Codex to help plan the scope, write the interface and code, and draft the documentation. I kept its suggestion to make the start action explicit and visible. I reduced the proposed larger friend and item system to a few deterministic discoveries so the main interaction could be completed and tested. Forest, Finch, and Pomofocus were used as interaction references; their assets and code were not copied.

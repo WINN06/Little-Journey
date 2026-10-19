@@ -1,8 +1,9 @@
 const STORAGE_KEY = "little-journey-state-v1";
 const LANGUAGE_KEY = "little-journey-language-v1";
+const MOTION_KEY = "little-journey-motion-v1";
 const $ = (id) => document.getElementById(id);
 const ui = {
-  todayLabel: $("todayLabel"), sceneClock: $("sceneClock"), sceneStatus: $("sceneStatus"), sceneDistance: $("sceneDistance"), world: $("world"), journeyCard: $("journeyCard"),
+  todayLabel: $("todayLabel"), sceneClock: $("sceneClock"), sceneStatus: $("sceneStatus"), sceneDistance: $("sceneDistance"), motionButton: $("motionButton"), world: $("world"), journeyCard: $("journeyCard"),
   journeyIdle: $("journeyIdle"), readyView: $("readyView"), readyTask: $("readyTask"), readyMeta: $("readyMeta"), startButton: $("startButton"), changeButton: $("changeButton"),
   activeView: $("activeView"), activeKind: $("activeKind"), activeTask: $("activeTask"), timer: $("timer"), progressTrack: $("progressTrack"), progressFill: $("progressFill"), elapsedLabel: $("elapsedLabel"), remainingLabel: $("remainingLabel"), pauseButton: $("pauseButton"), endButton: $("endButton"),
   resultView: $("resultView"), feedback: $("feedback"), resultNextButton: $("resultNextButton"), storageNote: $("storageNote"), instantForm: $("instantForm"), instantTask: $("instantTask"), instantMinutes: $("instantMinutes"), instantError: $("instantError"),
@@ -13,7 +14,7 @@ const ui = {
 const I18N = {
   en: {
     brand: "Little Journey", brandAria: "Little Journey, back to top", local: "LOCAL JOURNEY", introKicker: "A LITTLE FOCUS COMPANION", journeyKicker: "JOURNEY STATUS", routeKicker: "TODAY'S ROUTE", quickKicker: "QUICK CHALLENGE", bagKicker: "LITTLE DISCOVERIES", heroA: "A little progress,", heroB: "together.", heroP: "Choose one thing to do. Your companion will explore while you make time for it.",
-    adventureAria: "Journey scene and controls", sceneLabel: "EXPLORATION VIEW", journeyTitle: "Your journey", idleTitle: "Where shall we go?", idleDescription: "Pick a plan below, or create a quick focus challenge. Your start button will appear here.", chooseRoute: "Choose a route ↓", readyLabel: "READY TO EXPLORE", startJourney: "Start journey", changeChoice: "Choose something else", progressAria: "Journey progress", endEarly: "End early", resultLabel: "JOURNEY REPORT", nextJourney: "Plan another journey", storageError: "This browser could not save your data. Your progress may disappear after a refresh.",
+    adventureAria: "Journey scene and controls", sceneLabel: "EXPLORATION VIEW", motionOn: "MOTION ON", motionOff: "MOTION OFF", motionAria: "Play journey animation", journeyTitle: "Your journey", idleTitle: "Where shall we go?", idleDescription: "Pick a plan below, or create a quick focus challenge. Your start button will appear here.", chooseRoute: "Choose a route ↓", readyLabel: "READY TO EXPLORE", startJourney: "Start journey", changeChoice: "Choose something else", progressAria: "Journey progress", endEarly: "End early", resultLabel: "JOURNEY REPORT", nextJourney: "Plan another journey", storageError: "This browser could not save your data. Your progress may disappear after a refresh.",
     scheduleTitle: "Today's route", scheduleIntro: "Map out study, work, or a daily break.", planTaskLabel: "Activity", planTaskPlaceholder: "e.g. Go to class", startTime: "Start", minutes: "Minutes", type: "Type", focus: "Focus", daily: "Daily", add: "Add", addPlanAria: "Add plan", scheduleNote: "When it's time, select the plan and start from the journey panel above.",
     instantTitle: "Focus now", instantIntro: "No plan needed. Choose a task and a little time.", instantTaskLabel: "What will you work on?", instantTaskPlaceholder: "e.g. Read one chapter", duration: "Journey length", minuteUnit: "MIN", presetsAria: "Quick durations", demoOne: "TRY 1", prepareChallenge: "Prepare challenge", backpackTitle: "Travel bag", backpackIntro: "Every small step can leave something behind.", footerBrand: "LITTLE JOURNEY / 小小远行", footerNote: "Your plans stay in this browser · Every small step counts",
     planCount: "{count} plans", planCountOne: "1 plan", planUnit: "min", emptyTitle: "No route planned yet", emptyBody: "Add one small thing and begin here.", done: "Done ✓", exploring: "Exploring ···", selected: "Selected ✓", selectRoute: "Select route ↗", due: "Time to go", delete: "Delete {title}", journeyBusy: "Finish or end the current journey first.", planTaskEmpty: "Name this part of your route first.", planTimeEmpty: "Choose a start time.", planMinutesInvalid: "Enter a whole number from 1 to 180 minutes.", planMidnight: "This plan goes past midnight. Shorten it or choose an earlier time.", planOverlap: "Another plan already uses this time. Try a different time or length.", instantTaskEmpty: "Write down one thing you will do first.", instantMinutesInvalid: "Enter a whole number from 1 to 120 minutes.",
@@ -22,7 +23,7 @@ const I18N = {
   },
   zh: {
     brand: "小小远行", brandAria: "小小远行，返回顶部", local: "本地旅程", introKicker: "像素宠物专注伙伴", journeyKicker: "旅程状态", routeKicker: "今日路线", quickKicker: "即刻挑战", bagKicker: "小小发现", heroA: "今天，也一起", heroB: "慢慢前进。", heroP: "选一件事，和小伙伴出发。每一段认真度过的时间，都会留下一个小发现。",
-    adventureAria: "探索画面与旅程控制", sceneLabel: "远行画面", journeyTitle: "当前旅程", idleTitle: "今天想去哪儿？", idleDescription: "从下方选择一项计划，或准备一个即刻挑战。开始按钮会出现在这里。", chooseRoute: "选择路线 ↓", readyLabel: "准备出发", startJourney: "和小伙伴出发", changeChoice: "换一件事", progressAria: "探索进度", endEarly: "提前收队", resultLabel: "远行报告", nextJourney: "计划下一段旅程", storageError: "浏览器暂时无法保存数据；刷新页面后记录可能消失。",
+    adventureAria: "探索画面与旅程控制", sceneLabel: "远行画面", motionOn: "动画 开", motionOff: "动画 关", motionAria: "播放远行动画", journeyTitle: "当前旅程", idleTitle: "今天想去哪儿？", idleDescription: "从下方选择一项计划，或准备一个即刻挑战。开始按钮会出现在这里。", chooseRoute: "选择路线 ↓", readyLabel: "准备出发", startJourney: "和小伙伴出发", changeChoice: "换一件事", progressAria: "探索进度", endEarly: "提前收队", resultLabel: "远行报告", nextJourney: "计划下一段旅程", storageError: "浏览器暂时无法保存数据；刷新页面后记录可能消失。",
     scheduleTitle: "今天的路线", scheduleIntro: "把学习、工作或休息放进今天的地图。", planTaskLabel: "安排", planTaskPlaceholder: "例如：去上课", startTime: "开始", minutes: "分钟", type: "类型", focus: "专注", daily: "日常", add: "添加", addPlanAria: "添加安排", scheduleNote: "时间到了就选择这项计划，再到上方的旅程区点击出发。",
     instantTitle: "即刻挑战", instantIntro: "无需预先计划，写下一件事和一点时间。", instantTaskLabel: "这次要做的事", instantTaskPlaceholder: "例如：读一章书", duration: "探索时长", minuteUnit: "分钟", presetsAria: "快捷设置时长", demoOne: "体验 1", prepareChallenge: "准备挑战", backpackTitle: "旅途背包", backpackIntro: "每一小步，都可以留下一个发现。", footerBrand: "小小远行 / LITTLE JOURNEY", footerNote: "你的安排只保存在当前浏览器中 · 给每一小步一点掌声",
     planCount: "{count} 项安排", planCountOne: "1 项安排", planUnit: "分钟", emptyTitle: "今天的路线还是空的", emptyBody: "先写下一件小事，让旅程从这里开始。", done: "已完成 ✓", exploring: "探索中 ···", selected: "已选择 ✓", selectRoute: "选择路线 ↗", due: "已到时间", delete: "删除{title}", journeyBusy: "先完成或结束当前旅程，再开始下一段。", planTaskEmpty: "给这段路线起个名字吧。", planTimeEmpty: "请选择开始时间。", planMinutesInvalid: "时长需要是 1–180 分钟的整数。", planMidnight: "这段安排会跨过午夜，请缩短时长或提前开始。", planOverlap: "这段时间已有安排，请换个时间或调整时长。", instantTaskEmpty: "先写下这次要做的事。", instantMinutesInvalid: "请输入 1–120 分钟的整数时长。",
@@ -33,6 +34,8 @@ const I18N = {
 
 let language = "en";
 try { if (localStorage.getItem(LANGUAGE_KEY) === "zh") language = "zh"; } catch { /* Browser storage is optional. */ }
+let motionEnabled = true;
+try { motionEnabled = localStorage.getItem(MOTION_KEY) !== "off"; } catch { /* Browser storage is optional. */ }
 function t(key, values = {}) { return (I18N[language][key] || key).replace(/\{(\w+)\}/g, (_, name) => String(values[name] ?? "")); }
 function applyLanguage() {
   document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
@@ -145,6 +148,9 @@ function renderFeedback() {
 }
 function renderSceneMeta() {
   const now = new Date();
+  ui.motionButton.textContent = t(motionEnabled ? "motionOn" : "motionOff");
+  ui.motionButton.setAttribute("aria-label", t("motionAria"));
+  ui.motionButton.setAttribute("aria-pressed", String(motionEnabled));
   ui.todayLabel.textContent = new Intl.DateTimeFormat(t("dateLocale"), { month: "long", day: "numeric", weekday: "long" }).format(now);
   ui.sceneClock.textContent = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
   if (state.active) {
@@ -210,6 +216,7 @@ ui.planList.addEventListener("click", (event) => {
 });
 ui.pauseButton.addEventListener("click", () => { const journey = state.active; if (!journey) return; if (journey.status === "paused") { journey.status = "running"; journey.endsAt = Date.now() + journey.remainingSeconds * 1000; } else { journey.remainingSeconds = remainingSeconds(); journey.endsAt = null; journey.status = "paused"; } saveState(); renderAll(); });
 ui.endButton.addEventListener("click", endEarly);
+ui.motionButton.addEventListener("click", () => { motionEnabled = !motionEnabled; try { localStorage.setItem(MOTION_KEY, motionEnabled ? "on" : "off"); } catch { /* Animation still works for this visit. */ } renderSceneMeta(); });
 
 const ctx = ui.world.getContext("2d");
 const COLORS = { sky: "#e3e8d9", hill: "#d0dccc", far: "#b5c6b2", ink: "#26382d", light: "#f5f7e9" };
@@ -223,7 +230,7 @@ function drawPet(x, y, step, moving) {
 }
 function drawWorld(now) {
   if (!ctx) return;
-  const moving = state.active?.status === "running" && !reducedMotion.matches;
+  const moving = state.active?.status === "running" && motionEnabled;
   const travel = moving ? now * .09 : 0;
   rect(0, 0, 320, 160, COLORS.sky);
   rect(229, 24, 19, 19, COLORS.light); rect(231, 21, 15, 3, COLORS.light); rect(231, 43, 15, 3, COLORS.light);
@@ -232,11 +239,12 @@ function drawWorld(now) {
   rect(0, 119, 320, 41, COLORS.far); rect(0, 119, 320, 3, COLORS.ink);
   for (let i = -1; i < 8; i++) { const x = i * 57 - (travel % 57); rect(x + 34, 101, 4, 18, COLORS.ink); rect(x + 28, 96, 16, 5, COLORS.ink); rect(x + 31, 91, 10, 5, COLORS.ink); rect(x + 47, 113, 4, 6, COLORS.ink); }
   for (let i = -1; i < 10; i++) { const x = i * 41 - (travel * 1.5 % 41); rect(x + 11, 139, 15, 2, COLORS.hill); rect(x + 31, 151, 7, 2, COLORS.ink); }
-  rect(53, 119, 35, 3, COLORS.ink);
+  const petX = moving ? 58 + Math.round(Math.sin(now / 430) * 13) : 58;
+  rect(petX - 5, 119, 35, 3, COLORS.ink);
   const step = moving ? Math.floor(now / 105) % 4 : 0;
   const bounce = moving ? [0, -3, 0, -2][step] : !reducedMotion.matches ? Math.round(Math.sin(now / 550)) : 0;
-  drawPet(58, 90 + bounce, step, moving);
-  if (moving) { const shift = Math.floor(now / 80) % 3; rect(39 - shift * 2, 102, 10, 2, COLORS.ink); rect(33 - shift * 2, 110, 14, 2, COLORS.ink); rect(47 - shift * 2, 117, 4, 3, COLORS.light); }
+  drawPet(petX, 90 + bounce, step, moving);
+  if (moving) { const shift = Math.floor(now / 80) % 3; rect(petX - 19 - shift * 2, 102, 10, 2, COLORS.ink); rect(petX - 25 - shift * 2, 110, 14, 2, COLORS.ink); rect(petX - 11 - shift * 2, 117, 4, 3, COLORS.light); }
   else if (!state.active) { rect(92, 81, 2, 2, COLORS.ink); rect(97, 76, 2, 2, COLORS.ink); rect(102, 81, 2, 2, COLORS.ink); }
   if (state.active?.status === "paused") { rect(96, 76, 3, 9, COLORS.ink); rect(102, 76, 3, 9, COLORS.ink); }
   requestAnimationFrame(drawWorld);

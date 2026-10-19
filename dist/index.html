@@ -32,7 +32,7 @@
 
         <section class="adventure-grid" aria-label="Journey scene and controls" data-i18n-aria="adventureAria">
           <div class="scene-card pixel-frame">
-            <div class="scene-topline"><span><span class="tiny-square"></span> <span data-i18n="sceneLabel">EXPLORATION VIEW</span></span><span id="sceneClock">--:--</span></div>
+            <div class="scene-topline"><span><span class="tiny-square"></span> <span data-i18n="sceneLabel">EXPLORATION VIEW</span></span><span class="scene-tools"><button type="button" id="motionButton" class="motion-button" aria-pressed="true">MOTION ON</button><span id="sceneClock">--:--</span></span></div>
             <div class="canvas-wrap"><canvas id="world" width="320" height="160" role="img" aria-label="Pixel companion waiting on a path"></canvas><div class="scene-corner scene-corner-left" aria-hidden="true">+</div><div class="scene-corner scene-corner-right" aria-hidden="true">+</div></div>
             <div class="scene-bottomline"><span class="scene-live"><span class="signal-bars" aria-hidden="true">▂▄▆</span><span id="sceneStatus">Your companion is waiting</span></span><span id="sceneDistance">Trailhead · ready</span></div>
           </div>
