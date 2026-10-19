@@ -1,29 +1,32 @@
-# 小小远行 · 像素宠物专注钟
+# Little Journey
 
-一个供学生或工作者使用的小型网页原型。写下一件事并开始计时，像素小伙伴就会在画面里探索。完成后，专注时长会决定带回的收集品。你也可以把今天的上课、工作和休息安排写进路线，到点时手动开始对应旅程。
+Little Journey is a small pixel style focus companion for students and anyone who wants a gentle way to start a task. You choose a task, start a timed journey, and watch a tiny creature explore while you work. Completing a focus journey adds an item to your travel bag; longer journeys reveal different items.
 
-## 本地运行
+## Try it locally
 
-需要 Node.js 18 或更新版本。无需安装依赖。
+Requires Node.js 18 or later. There are no packages to install.
 
 ```bash
 node serve.mjs
 ```
 
-在浏览器打开 `http://127.0.0.1:4173`。也可以使用任意静态文件服务器发布 `dist/`。
+Open `http://127.0.0.1:4173` in a browser. The static files in `dist/` can also be served by any static web server.
 
-## 体验方式
+## Main interaction
 
-1. 在“即刻挑战”写一件事，选择 1 分钟体验时长，点击“和小伙伴出发”。
-2. 观察宠物奔跑、倒计时和进度；试试暂停与继续。
-3. 完成后查看结果与背包。也可以在“今天的路线”添加一个计划，点击对应的“出发”。
+1. Add an activity to **Today's route** or enter one in **Focus now**. Choose **TRY 1** for a one minute demonstration.
+2. Select the route or prepare the quick challenge. The choice appears in the separate **Your journey** panel.
+3. Press **Start journey**. The pet runs through a scrolling scene while the countdown and progress bar update.
+4. Pause, resume, or end early when needed. On completion, the journey report appears in the same panel and a focus reward goes into the travel bag.
 
-计划和收集品保存在当前浏览器的本地存储中。日常安排可以计时，但只有专注旅程会获得收集品。页面不监控用户在其他应用中的行为，也不会主动发送系统通知。
+The top right switch changes the interface between English and Chinese. English is the default on a new browser. The choice, plans, and discoveries are saved in that browser's local storage.
 
-## 当前状态
+## Boundaries
 
-这是供讨论和试用的第一版。正式提交前仍需完成真实用户试用、根据观察修改体验，并将截图及最终过程记录补充到仓库。
+The timer measures elapsed time, not whether the user was focused in another app. Planned activities require an explicit start; the page does not send system notifications. Daily activities can have a journey but only focus journeys earn collectible items. Plans are for the current day and do not sync between devices.
 
-## 素材与工具
+This is an evolving prototype. Before course submission, a separate person still needs to try it, and a screenshot must be added here along with the resulting design decision in `PROCESS.md`.
 
-界面、角色与场景由本项目代码原创绘制，没有使用外部图片或音频。设计思路参考了 [Forest](https://www.forestapp.cc/)、[Finch](https://finchcare.com/about-finch) 和 [Pomofocus](https://pomofocus.io/) 的专注与反馈机制；没有复制它们的素材或代码。开发过程中使用了 OpenAI Codex 辅助界面、代码和文档草拟。具体选择与修改会记录在 `PROCESS.md`。
+## Credits and tools
+
+The interface, creature, and scenery are drawn in this project's own HTML, CSS, and JavaScript. No external images, audio, or code were copied. Interaction ideas were informed by [Forest](https://www.forestapp.cc/), [Finch](https://finchcare.com/about-finch), and [Pomofocus](https://pomofocus.io/). OpenAI Codex helped plan and implement the prototype; `PROCESS.md` records the design decisions.

@@ -1,123 +1,103 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#e9ecdf" />
-    <meta name="description" content="把今天的小任务，变成和像素小伙伴一起完成的一段旅程。" />
-    <title>小小远行 · 像素宠物专注钟</title>
+    <meta name="description" content="Turn a small task into a little journey with your pixel companion." />
+    <title>Little Journey · Pixel Focus Companion</title>
     <link rel="stylesheet" href="./style.css" />
     <script defer src="./app.js"></script>
   </head>
   <body>
     <div class="page-shell">
       <header class="site-header">
-        <a class="brand" href="#top" aria-label="小小远行，返回顶部">
+        <a class="brand" href="#top" aria-label="Little Journey, back to top" data-i18n-aria="brandAria">
           <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-          <span>小小远行<span class="brand-dot">.</span></span>
+          <span><span data-i18n="brand">Little Journey</span><span class="brand-dot">.</span></span>
         </a>
         <div class="header-right">
           <span class="header-date" id="todayLabel"></span>
-          <span class="status-pill"><span class="status-dot"></span> LOCAL JOURNEY</span>
+          <div class="language-switch" role="group" aria-label="Language / 语言"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="zh" aria-pressed="false">中文</button></div>
+          <span class="status-pill"><span class="status-dot"></span><span data-i18n="local">LOCAL JOURNEY</span></span>
         </div>
       </header>
 
       <main id="top">
         <section class="intro" aria-labelledby="pageTitle">
-          <div class="eyebrow"><span class="tiny-square"></span> A LITTLE FOCUS COMPANION <span class="eyebrow-line"></span> 01 / 03</div>
-          <h1 id="pageTitle">今天，也一起<span>慢慢前进。</span></h1>
-          <p>写下一件事，和小伙伴出发。每一段认真度过的时间，都会留下一个小发现。</p>
+          <div class="eyebrow"><span class="tiny-square"></span> <span data-i18n="introKicker">A LITTLE FOCUS COMPANION</span> <span class="eyebrow-line"></span> 01 / 03</div>
+          <h1 id="pageTitle"><span data-i18n="heroA">A little progress,</span> <span data-i18n="heroB">together.</span></h1>
+          <p data-i18n="heroP">Choose one thing to do. Your companion will explore while you make time for it.</p>
         </section>
 
-        <section class="adventure-grid" aria-label="当前探索与专注计时">
+        <section class="adventure-grid" aria-label="Journey scene and controls" data-i18n-aria="adventureAria">
           <div class="scene-card pixel-frame">
-            <div class="scene-topline">
-              <span><span class="tiny-square"></span> 远行画面</span>
-              <span id="sceneClock">--:--</span>
-            </div>
-            <div class="canvas-wrap">
-              <canvas id="world" width="320" height="160" role="img" aria-label="像素小宠物在草地上等待出发"></canvas>
-              <div class="scene-corner scene-corner-left" aria-hidden="true">+</div>
-              <div class="scene-corner scene-corner-right" aria-hidden="true">+</div>
-            </div>
-            <div class="scene-bottomline">
-              <span class="scene-live"><span class="signal-bars" aria-hidden="true">▂▄▆</span><span id="sceneStatus">小伙伴正在等你</span></span>
-              <span id="sceneDistance">起点 · 还未出发</span>
-            </div>
+            <div class="scene-topline"><span><span class="tiny-square"></span> <span data-i18n="sceneLabel">EXPLORATION VIEW</span></span><span id="sceneClock">--:--</span></div>
+            <div class="canvas-wrap"><canvas id="world" width="320" height="160" role="img" aria-label="Pixel companion waiting on a path"></canvas><div class="scene-corner scene-corner-left" aria-hidden="true">+</div><div class="scene-corner scene-corner-right" aria-hidden="true">+</div></div>
+            <div class="scene-bottomline"><span class="scene-live"><span class="signal-bars" aria-hidden="true">▂▄▆</span><span id="sceneStatus">Your companion is waiting</span></span><span id="sceneDistance">Trailhead · ready</span></div>
           </div>
 
-          <div class="focus-card pixel-frame">
-            <div class="section-kicker"><span class="tiny-square"></span> FOCUS MODE <span class="index">01</span></div>
-            <h2>即刻挑战</h2>
-            <p class="card-intro">现在想完成什么？给它一段专属的探索时间。</p>
-
-            <form id="instantForm" novalidate>
-              <label for="instantTask">这次要做的事</label>
-              <input id="instantTask" name="task" type="text" maxlength="40" placeholder="例如：完成一页阅读笔记" autocomplete="off" />
-              <div class="duration-row">
-                <label for="instantMinutes">探索时长</label>
-                <span>分钟</span>
-              </div>
-              <div class="minutes-control">
-                <input id="instantMinutes" name="minutes" type="number" min="1" max="120" step="1" value="25" inputmode="numeric" />
-                <div class="presets" aria-label="快捷设置时长">
-                  <button type="button" class="preset" data-minutes="1">体验 1</button>
-                  <button type="button" class="preset" data-minutes="25">25</button>
-                  <button type="button" class="preset" data-minutes="45">45</button>
-                </div>
-              </div>
-              <p class="field-error" id="instantError" role="alert" hidden></p>
-              <button type="submit" class="primary-button"><span>▶</span> 和小伙伴出发 <span class="button-arrow">↗</span></button>
-            </form>
-
+          <section class="journey-card pixel-frame" id="journeyCard" aria-labelledby="journeyTitle">
+            <div class="section-kicker"><span class="tiny-square"></span> <span data-i18n="journeyKicker">JOURNEY STATUS</span> <span class="index">01</span></div>
+            <h2 id="journeyTitle" data-i18n="journeyTitle">Your journey</h2>
+            <div id="journeyIdle" class="journey-idle">
+              <div class="journey-icon" aria-hidden="true">✳</div>
+              <strong data-i18n="idleTitle">Where shall we go?</strong>
+              <p data-i18n="idleDescription">Pick a plan below, or create a quick focus challenge. Your start button will appear here.</p>
+              <a class="inline-link" href="#routes" data-i18n="chooseRoute">Choose a route ↓</a>
+            </div>
+            <div id="readyView" class="ready-view" hidden>
+              <div class="active-label" data-i18n="readyLabel">READY TO EXPLORE</div>
+              <h3 id="readyTask"></h3>
+              <p id="readyMeta"></p>
+              <button type="button" class="primary-button" id="startButton"><span>▶</span><span data-i18n="startJourney">Start journey</span><span class="button-arrow">↗</span></button>
+              <button type="button" class="text-button" id="changeButton" data-i18n="changeChoice">Choose something else</button>
+            </div>
             <div id="activeView" class="active-view" hidden>
-              <div class="active-label" id="activeKind">正在探索</div>
-              <h3 id="activeTask"></h3>
-              <div class="timer" id="timer" aria-live="off">25:00</div>
-              <div class="progress-track" role="progressbar" aria-label="探索进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack"><span id="progressFill"></span></div>
-              <div class="active-meta"><span id="elapsedLabel">已走过 0 分钟</span><span id="remainingLabel">剩余 25 分钟</span></div>
-              <div class="active-actions">
-                <button type="button" class="primary-button" id="pauseButton">Ⅱ 暂停一下</button>
-                <button type="button" class="text-button" id="endButton">提前收队</button>
-              </div>
+              <div class="active-label" id="activeKind">EXPLORING</div><h3 id="activeTask"></h3><div class="timer" id="timer" aria-live="off">25:00</div>
+              <div class="progress-track" role="progressbar" aria-label="Journey progress" data-i18n-aria="progressAria" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrack"><span id="progressFill"></span></div>
+              <div class="active-meta"><span id="elapsedLabel">0 min travelled</span><span id="remainingLabel">25 min left</span></div>
+              <div class="active-actions"><button type="button" class="primary-button" id="pauseButton">Ⅱ Pause</button><button type="button" class="text-button" id="endButton" data-i18n="endEarly">End early</button></div>
             </div>
-
-            <div class="feedback" id="feedback" role="status" aria-live="polite" hidden></div>
-          </div>
+            <div id="resultView" class="result-view" hidden><div class="active-label" data-i18n="resultLabel">JOURNEY REPORT</div><div class="feedback" id="feedback" role="status" aria-live="polite"></div><button type="button" class="primary-button" id="resultNextButton"><span>↗</span><span data-i18n="nextJourney">Plan another journey</span></button></div>
+            <p class="storage-note" id="storageNote" hidden></p>
+          </section>
         </section>
 
-        <div class="lower-grid">
+        <div class="lower-grid" id="routes">
           <section class="schedule-section pixel-frame" aria-labelledby="scheduleTitle">
-            <div class="section-kicker"><span class="tiny-square"></span> TODAY'S ROUTE <span class="index">02</span></div>
-            <div class="section-heading">
-              <div><h2 id="scheduleTitle">今天的路线</h2><p>把上课、工作或休息放进今天的地图。</p></div>
-              <span class="count-tag" id="planCount">0 项安排</span>
-            </div>
+            <div class="section-kicker"><span class="tiny-square"></span> <span data-i18n="routeKicker">TODAY'S ROUTE</span> <span class="index">02</span></div>
+            <div class="section-heading"><div><h2 id="scheduleTitle" data-i18n="scheduleTitle">Today's route</h2><p data-i18n="scheduleIntro">Map out study, work, or a daily break.</p></div><span class="count-tag" id="planCount">0 plans</span></div>
             <form id="planForm" class="plan-form" novalidate>
-              <div class="form-field task-field"><label for="planTask">安排</label><input id="planTask" maxlength="40" placeholder="例如：去上课" autocomplete="off" /></div>
-              <div class="form-field time-field"><label for="planTime">开始</label><input id="planTime" type="time" /></div>
-              <div class="form-field length-field"><label for="planMinutes">分钟</label><input id="planMinutes" type="number" min="1" max="180" value="25" inputmode="numeric" /></div>
-              <div class="form-field kind-field"><label for="planKind">类型</label><select id="planKind"><option value="focus">专注</option><option value="daily">日常</option></select></div>
-              <button type="submit" class="add-button" aria-label="添加安排">＋<span> 添加</span></button>
+              <div class="form-field task-field"><label for="planTask" data-i18n="planTaskLabel">Activity</label><input id="planTask" maxlength="40" placeholder="e.g. Go to class" data-i18n-placeholder="planTaskPlaceholder" autocomplete="off" /></div>
+              <div class="form-field time-field"><label for="planTime" data-i18n="startTime">Start</label><input id="planTime" type="time" /></div>
+              <div class="form-field length-field"><label for="planMinutes" data-i18n="minutes">Minutes</label><input id="planMinutes" type="number" min="1" max="180" value="25" inputmode="numeric" /></div>
+              <div class="form-field kind-field"><label for="planKind" data-i18n="type">Type</label><select id="planKind"><option value="focus" data-i18n="focus">Focus</option><option value="daily" data-i18n="daily">Daily</option></select></div>
+              <button type="submit" class="add-button" aria-label="Add plan" data-i18n-aria="addPlanAria">＋ <span data-i18n="add">Add</span></button>
             </form>
-            <p class="field-error" id="planError" role="alert" hidden></p>
-            <div id="planList" class="plan-list" aria-live="polite"></div>
-            <div class="schedule-note"><span>✳</span> 到点后小伙伴会提醒你；点击“出发”才会开始计时。</div>
+            <p class="field-error" id="planError" role="alert" hidden></p><div id="planList" class="plan-list" aria-live="polite"></div>
+            <div class="schedule-note"><span>✳</span><span data-i18n="scheduleNote">When it's time, select the plan and start from the journey panel above.</span></div>
           </section>
 
-          <section class="backpack-section pixel-frame" aria-labelledby="backpackTitle">
-            <div class="section-kicker"><span class="tiny-square"></span> LITTLE DISCOVERIES <span class="index">03</span></div>
-            <div class="section-heading"><div><h2 id="backpackTitle">旅途背包</h2><p>不用着急，发现会慢慢多起来。</p></div></div>
-            <div id="collection" class="collection-grid"></div>
-            <div class="friend-card" id="friendCard">
-              <div class="friend-icon" aria-hidden="true">?</div>
-              <div><strong id="friendName">还未遇见的朋友</strong><span id="friendHint">完成 3 次专注远行后，或许会相遇。</span></div>
-            </div>
+          <section class="instant-section pixel-frame" aria-labelledby="instantTitle">
+            <div class="section-kicker"><span class="tiny-square"></span> <span data-i18n="quickKicker">QUICK CHALLENGE</span> <span class="index">03</span></div>
+            <div class="section-heading"><div><h2 id="instantTitle" data-i18n="instantTitle">Focus now</h2><p data-i18n="instantIntro">No plan needed. Choose a task and a little time.</p></div></div>
+            <form id="instantForm" novalidate>
+              <label for="instantTask" data-i18n="instantTaskLabel">What will you work on?</label><input id="instantTask" name="task" type="text" maxlength="40" placeholder="e.g. Read one chapter" data-i18n-placeholder="instantTaskPlaceholder" autocomplete="off" />
+              <div class="duration-row"><label for="instantMinutes" data-i18n="duration">Journey length</label><span data-i18n="minuteUnit">MIN</span></div>
+              <div class="minutes-control"><input id="instantMinutes" name="minutes" type="number" min="1" max="120" step="1" value="25" inputmode="numeric" /><div class="presets" aria-label="Quick durations" data-i18n-aria="presetsAria"><button type="button" class="preset" data-minutes="1" data-i18n="demoOne">TRY 1</button><button type="button" class="preset" data-minutes="25">25</button><button type="button" class="preset" data-minutes="45">45</button></div></div>
+              <p class="field-error" id="instantError" role="alert" hidden></p><button type="submit" class="primary-button"><span>＋</span><span data-i18n="prepareChallenge">Prepare challenge</span><span class="button-arrow">↗</span></button>
+            </form>
           </section>
         </div>
-      </main>
 
-      <footer class="site-footer"><span>小小远行 / LITTLE JOURNEY</span><span>你的安排只保存在当前浏览器中 · 给每一小步一点掌声</span></footer>
+        <section class="backpack-section pixel-frame" aria-labelledby="backpackTitle">
+          <div class="section-kicker"><span class="tiny-square"></span> <span data-i18n="bagKicker">LITTLE DISCOVERIES</span> <span class="index">04</span></div>
+          <div class="section-heading"><div><h2 id="backpackTitle" data-i18n="backpackTitle">Travel bag</h2><p data-i18n="backpackIntro">Every small step can leave something behind.</p></div></div>
+          <div class="backpack-content"><div id="collection" class="collection-grid"></div><div class="friend-card" id="friendCard"><div class="friend-icon" aria-hidden="true">?</div><div><strong id="friendName">An undiscovered friend</strong><span id="friendHint">Complete 3 focus journeys to meet them.</span></div></div></div>
+        </section>
+      </main>
+      <footer class="site-footer"><span data-i18n="footerBrand">LITTLE JOURNEY / 小小远行</span><span data-i18n="footerNote">Your plans stay in this browser · Every small step counts</span></footer>
     </div>
   </body>
 </html>

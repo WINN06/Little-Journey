@@ -1,17 +1,23 @@
-# 设计过程（进行中）
+# Process (in progress)
 
-## 起点
+## Starting idea
 
-想把番茄钟和一个温和的像素宠物结合起来：用户完成现实中的任务，小宠物在横版场景中探索。重点是让开始、进行中、完成后的反馈形成一个容易理解的循环。
+I wanted a focus timer that feels like travelling alongside a small pixel pet. When the user spends time on a real task, the pet explores a simple side scrolling world and returns with a discovery. The intended user is a student or worker who benefits from a gentle prompt to begin.
 
-## 第一版取舍
+## First scope decision
 
-原想法包括完整日程、朋友、道具和多个探索场景。为了先完成可试用的核心交互，第一版保留“今日路线”“即刻挑战”和少量收集品。计划时间到了只作页面提示，用户点击“出发”后才计时，因为计划时间不代表用户已经开始任务。日常安排与专注任务都能进行旅程；收集品仅根据专注任务的完成时长发放。
+The original idea included a full daily timetable, many items, and pet friends. The first prototype kept a daily route, an immediate focus challenge, four collectible items, and one unlockable friend. Both kinds of task use the same timer. A scheduled time can prompt the user on the page, but the timer starts only after an explicit click; a timetable alone does not prove the user began the task.
 
-## AI 工具
+## Interface revision after author feedback
 
-使用 OpenAI Codex 协助整理范围、编写第一版网页和文档。保留了“用明确的开始动作连接现实任务与宠物探索”的建议；把最初设想中的复杂道具和好友系统缩小为四种收集品与一位可遇见的朋友。所有外部产品只作交互思路参考，没有复制其素材或代码。
+When trying the first prototype, I found it unclear where to start a task selected from **Today's route**: the start button and completion message appeared inside the **Focus now** card. I moved preparation, starting, timing, and the completion report into a separate **Your journey** panel that both task entry points share. Selecting a planned route or preparing a quick challenge now brings that panel into view. I also made English the default for the course audience, added a Chinese switch, and made the pet's running frames and scrolling scenery more visible.
 
-## 待完成的真实试用
+This feedback came from the project author. It does **not** replace the assignment's required trial with another person.
 
-尚未邀请其他人试用。正式提交前需要记录：试用者尝试了什么、在哪里犹豫、是否理解页面反馈，以及根据观察做出的实际修改。这里不能用推测代替真实观察。
+## AI tools
+
+I used OpenAI Codex to help plan the scope, write the interface and code, and draft the documentation. I kept its suggestion to make the start action explicit and visible. I reduced the proposed larger friend and item system to a few deterministic discoveries so the main interaction could be completed and tested. Forest, Finch, and Pomofocus were used as interaction references; their assets and code were not copied.
+
+## Required trial still to do
+
+Invite at least one other person to try the route and quick challenge. Record what they attempted, where they hesitated, whether the pet's response was clear, and one actual change made from that observation. Do not invent trial findings.
