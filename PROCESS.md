@@ -1,27 +1,29 @@
-# Process (in progress)
+# Process
 
-## Starting idea
+## Starting idea and intended user
 
-I wanted a focus timer that feels like travelling alongside a small pixel pet. When the user spends time on a real task, the pet explores a simple side scrolling world and returns with a discovery. The intended user is a student or worker who benefits from a gentle prompt to begin.
+I wanted a focus timer that feels like travelling alongside a small pixel pet. It is for a student or worker who benefits from a gentle prompt to begin. The user's deliberate start action sends the pet into a side scrolling scene. The moving pet, countdown, progress bar, and eventual discovery show what changed and what to do next.
 
-## First scope decision
+## Scope and first implementation
 
-The original idea included a full daily timetable, many items, and pet friends. The first prototype kept a daily route, an immediate focus challenge, four collectible items, and one unlockable friend. Both kinds of task use the same timer. A scheduled time can prompt the user on the page, but the timer starts only after an explicit click; a timetable alone does not prove the user began the task.
+The early idea included a detailed daily timetable, many items, and several pet friends. I narrowed it to two ways to begin a journey: selecting one activity from **Today's route**, or preparing an immediate **Focus now** challenge. Both use the same timer and journey panel. Four item types and one unlockable friend provide a small reward loop. A planned time only marks a route as ready; starting still takes a click.
 
-## Interface revision after author feedback
+## Revisions from my own testing
 
-When trying the first prototype, I found it unclear where to start a task selected from **Today's route**: the start button and completion message appeared inside the **Focus now** card. I moved preparation, starting, timing, and the completion report into a separate **Your journey** panel that both task entry points share. Selecting a planned route or preparing a quick challenge now brings that panel into view. I also made English the default for the course audience, added a Chinese switch, and made the pet's running frames and scrolling scenery more visible.
+In the first version, I hesitated after selecting a route because the start button and completion message appeared inside the quick challenge card. I moved preparation, start, timing, and the report into a separate **Your journey** panel. Both task entry points now lead to it. I also changed the default language to English for the course audience and added a Chinese switch.
 
-This feedback came from the project author. It does **not** replace the assignment's required trial with another person.
+Later, I saw the countdown run while the exploration scene looked frozen. I reproduced this in a browser reporting `prefers-reduced-motion: reduce`: the first version disabled the entire canvas animation under that preference. I changed the running scene to animate by default, added a visible motion toggle, and gave the pet clearer side-to-side movement. In that browser, I checked two running frames and saw the pet and scenery in different positions. Switching motion off stopped the scene while the countdown continued.
 
-## Animation correction after author feedback
+## Independent user trial and decision
 
-The author reported that the exploration scene appeared frozen while the countdown continued. I reproduced this in a browser reporting `prefers-reduced-motion: reduce`: the first version disabled the entire canvas animation under that preference. I changed the scene to animate by default during an active journey and added a visible motion toggle for anyone who wants to stop it. I also gave the pet a more noticeable side-to-side running movement. In the same browser, I checked two running frames and saw the pet and scenery in different positions; switching motion off stopped the scene while the countdown continued.
+One classmate tried the **Focus now** route: they prepared a quick challenge, started the journey, and looked at the result. I observed that they went through those steps smoothly, with no noticeable pause or confusion. Their feedback was that the current experience felt fine. They suggested future possibilities: meeting more companions, choosing which companion travels with you, uploading a custom companion, and exchanging discoveries for a collection of small items.
 
-## AI tools
+I kept the current interaction as it was after this trial. The classmate could complete the intended loop without help, and adding companions, uploads, and an exchange system now would make the project much larger than the one complete interaction this assignment asks for. I kept their ideas as possible future directions rather than claiming those features are implemented.
 
-I used OpenAI Codex to help plan the scope, write the interface and code, and draft the documentation. I kept its suggestion to make the start action explicit and visible. I reduced the proposed larger friend and item system to a few deterministic discoveries so the main interaction could be completed and tested. Forest, Finch, and Pomofocus were used as interaction references; their assets and code were not copied.
+## AI tools and decisions
 
-## Required trial still to do
+I used OpenAI Codex to help plan the scope, implement the HTML, CSS, and JavaScript, debug the animation, and draft documentation. I kept its suggestion to make starting a journey an explicit, visible action. I changed its broader idea for many pet friends and items into a small deterministic collection so I could finish and test the main interaction. I reviewed the interface and tested the running experience myself; the classmate trial above informed the decision to keep the main interaction small.
 
-Invite at least one other person to try the route and quick challenge. Record what they attempted, where they hesitated, whether the pet's response was clear, and one actual change made from that observation. Do not invent trial findings.
+## Development history
+
+The Git history contains the initial working prototype, a revision to the shared journey panel and bilingual interface, and the animation correction. This submission pass adds documentation, a screenshot, and explicit credits. The current project source and screenshot are original; [CREDITS.md](CREDITS.md) lists the interaction references.
